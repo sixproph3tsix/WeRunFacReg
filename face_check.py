@@ -14,32 +14,36 @@ import os
 # found_faces_folder = "C:\\Users\\prsnl\\Documents\\Python\\face_recognition\\found_faces\\"
 # found_faces_list = os.listdir(found_faces_folder)
 
-
-unknown_face = fr.load_image_file("C:\\Users\\prsnl\\Documents\\Python\\face_recognition\\found_faces\\2023 Cheha X Tri final-14201.jpgface-0.jpg")
-unknown_face_enc = fr.face_encodings(unknown_face)[0]
-
-
 known_faces_folder = "C:\\Users\\prsnl\\Documents\\Python\\face_recognition\\known_faces\\"
-lst_known_faces = os.listdir(known_faces_folder)
+known_faces_list = os.listdir(known_faces_folder)
 
-dict_face_enc = {"Filename":[],"Encoding":[]}
+# initialize the empty list for known faces
+loaded_knowns = []
+
+i = 0
 
 # Load knowns to compare against
-for facefile in lst_known_faces:
+for facefile in known_faces_list:
 
-    image = fr.load_image_file(known_faces_folder + facefile)
+    print(known_faces_folder + facefile)
+    loaded_knowns.append(fr.load_image_file(known_faces_folder + facefile))
 
-    encoded_face = fr.face_encodings(image)[0]
-    
-    dict_face_enc["Filename"].append(facefile)
-    dict_face_enc["Encoding"].append(encoded_face)
+    # Get the face encodings for the knowns
+    face_encoding = fr.face_encodings(loaded_knowns[i])[0]
+    i = i + 1
 
-known_face = dict_face_enc["Encoding"][0]
-print(dict_face_enc["Filename"][0])
+# face_b_encoding = fr.face_encodings(known_image_b)[0]
 
-results = fr.compare_faces([encoded_face], unknown_face_enc)
+# known_encodings = [
+#     face_a_encoding,
+#     face_b_encoding
+# ]
 
-# See how far apart the test image is from the known faces
+# # Load a test image and get encondings for it
+# image_to_test = fr.load_image_file("C:\\Users\\prsnl\\Documents\\Python\\face_recognition\\ingest_sample_comp\\2023 Cheha X Tri final-14200")
+# image_to_test_encoding = fr.face_encodings(image_to_test)[0]
+
+# # See how far apart the test image is from the known faces
 # face_distances = fr.face_distance(known_encodings, image_to_test_encoding)
 
 # for i, face_distance in enumerate(face_distances):

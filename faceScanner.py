@@ -3,8 +3,8 @@ import os
 from PIL import Image
 import time
 
-path = "C:\\Users\\prsnl\\Documents\\Python\\face_recognition\\ingest_sample_comp\\JPEG\\"
-output = "C:\\Users\\prsnl\\Documents\\Python\\face_recognition\\framed_faces\\"
+path = "C:\\Users\\prsnl\\Documents\\Python\\face_recognition\\ingest_sample_comp\\"
+output = "C:\\Users\\prsnl\\Documents\\Python\\face_recognition\\found_faces\\"
 
 dirlist = os.listdir(path)
 itr = 0
@@ -53,47 +53,41 @@ for file in dirlist:
         
         i = i + 1
         
+# # Often instead of just checking if two faces match or not (True or False), it's helpful to see how similar they are.
+# # You can do that by using the face_distance function.
+
+# # The model was trained in a way that faces with a distance of 0.6 or less should be a match. But if you want to
+# # be more strict, you can look for a smaller face distance. For example, using a 0.55 cutoff would reduce false
+# # positive matches at the risk of more false negatives.
+
+# # Note: This isn't exactly the same as a "percent match". The scale isn't linear. But you can assume that images with a
+# # smaller distance are more similar to each other than ones with a larger distance.
         
-        
-        
-        
-        
-        
-face_list = "C:\\Users\\prsnl\\Documents\\Python\\face_recognition\\framed_faces"
-face_list = os.listdir(face_list)
+# face_list_path = "C:\\Users\\prsnl\\Documents\\Python\\face_recognition\\framed_faces"
+# face_list = os.listdir(face_list_path)
 
-# Often instead of just checking if two faces match or not (True or False), it's helpful to see how similar they are.
-# You can do that by using the face_distance function.
+# # Load some images to compare against
+# known_image_a = fr.load_image_file("C:\\Users\\prsnl\\Documents\\Python\\face_recognition\\knownA.jpg")
+# known_image_b = fr.load_image_file("C:\\Users\\prsnl\\Documents\\Python\\face_recognition\\knownB.jpg")
 
-# The model was trained in a way that faces with a distance of 0.6 or less should be a match. But if you want to
-# be more strict, you can look for a smaller face distance. For example, using a 0.55 cutoff would reduce false
-# positive matches at the risk of more false negatives.
+# # Get the face encodings for the known images
+# face_a_encoding = fr.face_encodings(known_image_a)[0]
+# face_b_encoding = fr.face_encodings(known_image_b)[0]
 
-# Note: This isn't exactly the same as a "percent match". The scale isn't linear. But you can assume that images with a
-# smaller distance are more similar to each other than ones with a larger distance.
+# known_encodings = [
+#     face_a_encoding,
+#     face_b_encoding
+# ]
 
-# Load some images to compare against
-known_image_a = fr.load_image_file("C:\\Users\\prsnl\\Documents\\Python\\face_recognition\\knownA.jpg")
-known_image_b = fr.load_image_file("C:\\Users\\prsnl\\Documents\\Python\\face_recognition\\knownB.jpg")
+# # Load a test image and get encondings for it
+# image_to_test = fr.load_image_file("C:\\Users\\prsnl\\Documents\\Python\\face_recognition\\ingest_sample_comp\\2023 Cheha X Tri final-14200")
+# image_to_test_encoding = fr.face_encodings(image_to_test)[0]
 
-# Get the face encodings for the known images
-face_a_encoding = fr.face_encodings(known_image_a)[0]
-face_b_encoding = fr.face_encodings(known_image_b)[0]
+# # See how far apart the test image is from the known faces
+# face_distances = fr.face_distance(known_encodings, image_to_test_encoding)
 
-known_encodings = [
-    face_a_encoding,
-    face_b_encoding
-]
-
-# Load a test image and get encondings for it
-image_to_test = fr.load_image_file("C:\\Users\\prsnl\\Documents\\Python\\face_recognition\\ingest_sample_comp\\2023 Cheha X Tri final-14200")
-image_to_test_encoding = fr.face_encodings(image_to_test)[0]
-
-# See how far apart the test image is from the known faces
-face_distances = fr.face_distance(known_encodings, image_to_test_encoding)
-
-for i, face_distance in enumerate(face_distances):
-    print("The test image has a distance of {:.2} from known image #{}".format(face_distance, i))
-    print("- With a normal cutoff of 0.6, would the test image match the known image? {}".format(face_distance < 0.6))
-    print("- With a very strict cutoff of 0.5, would the test image match the known image? {}".format(face_distance < 0.5))
-    print()
+# for i, face_distance in enumerate(face_distances):
+#     print("The test image has a distance of {:.2} from known image #{}".format(face_distance, i))
+#     print("- With a normal cutoff of 0.6, would the test image match the known image? {}".format(face_distance < 0.6))
+#     print("- With a very strict cutoff of 0.5, would the test image match the known image? {}".format(face_distance < 0.5))
+#     print()
