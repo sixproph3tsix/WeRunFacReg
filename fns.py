@@ -30,7 +30,7 @@ def FaceDistance(known_img_path, unknown_img_path):
         
         return round(face_distance, 2)
     
-def faceScanner(input_path, output_path):
+def FaceScanner(input_path, output_path):
     
     dirlist = os.listdir(input_path)
     itr = 0
